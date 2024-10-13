@@ -15,6 +15,8 @@ import { useMqtt } from "@/composables/useMqtt";
 import { MqttConfig } from "@/models/mqttConfig";
 import Pcb from "@/components/p5/Pcb.vue";
 import {Switch, topSwitches, bottomSwitches} from "@/switchesConfig";
+import {createUnixTimestamp} from "@/functions";
+
 let counter = 0;
 
 const mqttConfig: MqttConfig = {
@@ -76,7 +78,7 @@ onMounted(() => {
 
     if (isConnected.value) {
       const message = JSON.stringify({
-        timestamp: new Date().toISOString(),
+        timestamp: createUnixTimestamp(),
         counter: counter,
         data: combinedStates
       });
